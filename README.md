@@ -44,7 +44,7 @@ As a Cybersecurity enthusiast, I applied best practices during development:
     Clone the repository:
     Bash
 
-    git clone https://github.com/YOUR_USERNAME/Lintz-Attorneys-Firm-Website.git
+    git clone https://github.com/BernardoLintz/Lintz-Attorneys-Firm-Website.git
 
     Open index.html in your browser (or use VS Code Live Server).
 
