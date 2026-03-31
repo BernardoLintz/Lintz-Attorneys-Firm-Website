@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,19 +39,17 @@
     </script>
 </head>
 <body>
-    <header class="sticky-nav bg-white shadow-sm">
-    <nav class="nav-container w-full flex justify-between items-center">
+    <header class="sticky-nav bg-white shadow-sm w-full left-0 top-0">
+    <nav class="nav-container w-full max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
         
         <div class="flex items-center gap-2">
-            <a href="#">
-                <img src="imagens/Lintz_advogados.png" class="h-10 w-auto" alt="Logo Escritório Lintz Advogados">
-            </a>
-            <a href="#" class="text-sm">
-                <span><strong>LINTZADV</strong>OGADOS</span>
+            <a href="#" class="flex items-center gap-2">
+                <img src="imagens/Lintz_advogados.png" class="h-10 w-auto" alt="Logo">
+                <span class="text-sm font-semibold tracking-tight"><strong>LINTZADV</strong>OGADOS</span>
             </a>
         </div>
 
-        <div class="nav-links hidden lg:flex items-center gap-4 text-xs font-semibold">
+        <div class="nav-links hidden lg:flex items-center gap-6 text-[11px] font-bold tracking-widest">
             <a href="#">HOME</a>
             <a href="#sobre">SOBRE NÓS</a>
             <a href="#atuacao">ÁREAS DE ATUAÇÃO</a>
@@ -62,14 +59,18 @@
             <a href="#contato">FALE CONOSCO</a>
         </div>
 
-        <button id="menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2 outline-none ml-auto">
+        <button id="menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2 outline-none focus:ring-0 appearance-none" style="-webkit-tap-highlight-color: transparent;">
             <div class="w-6 h-0.5 bg-black"></div>
             <div class="w-6 h-0.5 bg-black"></div>
             <div class="w-6 h-0.5 bg-black"></div>
         </button>
     </nav>
+</header>
 
-    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 flex flex-col p-4 space-y-4 text-sm font-medium shadow-lg">
+<div id="mobile-menu" class="fixed inset-0 z-[9999] bg-white flex flex-col p-8 space-y-6 transition-all duration-300 transform translate-x-full">
+    <div class="flex justify-end">
+        <button id="close-menu" class="text-3xl">&times;</button>
+    </div>
         <a href="#" class="block py-2 border-b border-gray-50">HOME</a>
         <a href="#sobre" class="block py-2 border-b border-gray-50">SOBRE NÓS</a>
         <a href="#atuacao" class="block py-2 border-b border-gray-50">ÁREAS DE ATUAÇÃO</a>
@@ -77,7 +78,7 @@
         <a href="#socios" class="block py-2 border-b border-gray-50">SÓCIOS</a>
         <a href="#materias" class="block py-2 border-b border-gray-50">MATÉRIAS</a>
         <a href="#contato" class="block py-2 border-b border-gray-50">FALE CONOSCO</a>
-    </div>
+</div>
 </header>
     <main>
         <h1 class="sr-only">Lintz Advogados - Escritório de Advocacia Internacional no Rio de Janeiro e Portugal</h1>
@@ -285,14 +286,14 @@
                             </div>
 
                             <div class="testimonial-card min-w-full md:min-w-[480px] bg-white p-10 rounded-3xl border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.03)]">
-                                <div class="flex items-center gap-4 mb-6"><img src="assets/logos/luciana.jpg" class="w-14 h-14 rounded-full object-cover" alt="Cliente">
+                                <div class="flex items-center gap-4 mb-6"><img src="imagens/luciana.jpg" class="w-14 h-14 rounded-full object-cover" alt="Cliente">
                                     <div><h4 class="font-bold text-black text-lg">Luciene Brauns</h4><p class="text-gray-400 text-xs uppercase tracking-widest">Proprietária do Espaço do Cérebro</p></div>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed italic text-base">"O Dr. Lintz foi nosso advogado em uma ação extrajudicial e sua intervenção e profissionalismo evitou sérios prejuízos a nossa Empresa."</p>
                             </div>
 
                             <div class="testimonial-card min-w-full md:min-w-[480px] bg-white p-10 rounded-3xl border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.03)]">
-                                <div class="flex items-center gap-4 mb-6"><img src="assets/logos/guilherme.jpg" class="w-14 h-14 rounded-full object-cover" alt="Cliente">
+                                <div class="flex items-center gap-4 mb-6"><img src="imagens/guilherme.jpg" class="w-14 h-14 rounded-full object-cover" alt="Cliente">
                                     <div><h4 class="font-bold text-black text-lg">Guilherme</h4><p class="text-gray-400 text-xs uppercase tracking-widest">CEO Oficina Brasil Dilima</p></div>
                                 </div>
                                 <p class="text-gray-600 leading-relaxed italic text-base">"O Escritório Lintz sempre atuou com dedicação e estratégia diferenciadas nos tribunais Cível. Graças aos seus advogados, obtive os resultados esperados após sérias dificuldades na minha empresa. Retribuo à todos a recomendação que recebi desse incrível escritório."</p>
