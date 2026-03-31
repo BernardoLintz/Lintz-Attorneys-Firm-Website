@@ -3,7 +3,7 @@
 A high-standard institutional website developed for Lintz Advogados, an international law firm. This project was built with a focus on minimalist aesthetics (Apple-style), optimized performance, and full responsiveness for mobile and tablet devices.
 🚀 Live Demo
 
-Check out the live project here: [INSERT_YOUR_GITHUB_PAGES_LINK_HERE]
+Check out the live project here: https://bernardolintz.github.io/Lintz-Attorneys-Firm-Website/
 🛠️ Technologies & Tools
 
     Frontend: HTML5, Tailwind CSS (Mobile First approach).
@@ -50,4 +50,4 @@ As a Cybersecurity enthusiast, I applied best practices during development:
 
 👤 Author
 
-Developed by Your Name – [LinkedIn] | [Email]
+Developed by 0xBlkswn – https://www.linkedin.com/in/bernardolintz | bernardolintz@hotmail.com
