@@ -283,3 +283,18 @@ if (track && cards.length > 0) {
             menu.classList.add('hidden');
         });
     });
+
+  // Bloquear clique direito apenas nas imagens
+document.addEventListener('contextmenu', function(e) {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+        // Opcional: alert("Imagens protegidas por direitos autorais.");
+    }
+}, false);
+
+// Impede o atalho Ctrl+S (Salvar página) que baixaria as imagens
+document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+    }
+});

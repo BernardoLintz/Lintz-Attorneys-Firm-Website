@@ -1,0 +1,9 @@
+# Cache do VS Code
+.vscode/
+
+# Arquivos do Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*

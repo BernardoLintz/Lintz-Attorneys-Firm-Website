@@ -59,6 +59,9 @@
             background-position: center;
             z-index: 1;
             will-change: transform;
+            /* Camada extra para a imagem de fundo do Hero */
+            user-select: none;
+            -webkit-user-drag: none;
         }
         .hero-content-wrapper {
             position: absolute;
@@ -134,4 +137,14 @@
             background: rgba(253, 253, 253, 0.9);
             backdrop-filter: blur(10px);
         }
-   
+  
+     /* Proteção de Imagens */
+        img {
+            -webkit-user-drag: none; /* Impede arrastar no Chrome/Safari */
+            user-select: none;       /* Impede selecionar a imagem como texto */
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            pointer-events: auto;    /* Mantém a imagem clicável para scripts, mas bloqueia o drag nativo */
+        }
+
