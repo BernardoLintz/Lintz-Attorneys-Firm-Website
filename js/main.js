@@ -84,30 +84,41 @@ function closeModal(modalId) {
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- MENU MOBILE (Lógica 'Active' para deslize lateral) ---
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
+   // --- MENU MOBILE ---
+const menuBtn = document.getElementById('menu-btn');
+const closeBtn = document.getElementById('close-menu'); // Adicionei o botão de fechar
+const mobileMenu = document.getElementById('mobile-menu');
 
-    if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            mobileMenu.classList.toggle('active');
-            
-            // Trava o scroll quando o menu está aberto
-            if (mobileMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
-        });
+if (menuBtn && mobileMenu) {
+    const toggleMenu = () => {
+        // Alterna as classes do Tailwind para deslizar
+        mobileMenu.classList.toggle('translate-x-full');
+        mobileMenu.classList.toggle('translate-x-0');
+        
+        // Trava o scroll
+        const isOpen = mobileMenu.classList.contains('translate-x-0');
+        document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+    };
 
-        // Fecha ao clicar nos links internos
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-        });
+    menuBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleMenu();
+    });
+
+    // Se o botão de fechar (X) existir, ele também deve funcionar
+    if (closeBtn) {
+        closeBtn.addEventListener('click', toggleMenu);
     }
+
+    // Fecha ao clicar nos links
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+            mobileMenu.classList.remove('translate-x-0');
+            document.body.style.overflow = 'auto';
+        });
+    });
+}
 
     // --- EMAILJS ---
     if (typeof emailjs !== 'undefined') {
