@@ -179,3 +179,14 @@ html {
     background: rgba(253, 253, 253, 0.9);
     backdrop-filter: blur(10px);
 }
+
+/* Adicione isso ao seu arquivo CSS */
+.animate-ticker {
+    display: flex;
+    will-change: transform;
+}
+
+/* Opcional: Pausar os logos ao passar o mouse */
+.animate-ticker:hover {
+    animation-play-state: paused;
+}

@@ -12,16 +12,20 @@ if (typeof tailwind !== 'undefined') {
                     'scroll-up': 'up 150s linear infinite',
                     'scroll-down': 'down 170s linear infinite',
                     'scroll-up-slow': 'up 160s linear infinite',
+                    'ticker': 'ticker 40s linear infinite', // Adicionado para os logos
                 },
                 keyframes: {
                     'up': { 'from': { transform: 'translateY(0)' }, 'to': { transform: 'translateY(-50%)' } },
-                    'down': { 'from': { transform: 'translateY(-50%)' }, 'to': { transform: 'translateY(0)' } }
+                    'down': { 'from': { transform: 'translateY(-50%)' }, 'to': { transform: 'translateY(0)' } },
+                    'ticker': { // Adicionado para movimento horizontal
+                        '0%': { transform: 'translateX(0)' },
+                        '100%': { transform: 'translateX(-50%)' }
+                    }
                 }
             }
         }
     };
 }
-
 // 2. VARIÁVEIS GLOBAIS
 let currentNews = 0;
 let autoPlayNews;
@@ -192,18 +196,23 @@ if (menuBtn && mobileMenu) {
     });
 
     // --- CARROSSEL DE DEPOIMENTOS ---
+    // --- CARROSSEL DE DEPOIMENTOS ---
     const track = document.getElementById('carousel-track');
     const indicatorsContainer = document.getElementById('indicators-container');
     const cards = document.querySelectorAll('.testimonial-card');
 
     if (track && cards.length > 0) {
         let currentIndex = 0;
-        indicatorsContainer.innerHTML = '';
+        let autoPlayCarousel; // Variável de controle
 
+        indicatorsContainer.innerHTML = '';
         cards.forEach((_, i) => {
             const dot = document.createElement('button');
             dot.className = `h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-black w-6' : 'bg-gray-300 w-2'}`;
-            dot.addEventListener('click', () => goToSlide(i));
+            dot.addEventListener('click', () => {
+                goToSlide(i);
+                startAutoPlay(); // Reinicia o timer ao interagir
+            });
             indicatorsContainer.appendChild(dot);
         });
 
@@ -218,22 +227,30 @@ if (menuBtn && mobileMenu) {
             const dots = indicatorsContainer.querySelectorAll('button');
             dots.forEach((dot, i) => {
                 if (i === currentIndex) {
-                    dot.classList.replace('bg-gray-300', 'bg-black');
-                    dot.classList.replace('w-2', 'w-6');
+                    dot.classList.add('bg-black', 'w-6');
+                    dot.classList.remove('bg-gray-300', 'w-2');
                 } else {
-                    dot.classList.replace('bg-black', 'bg-gray-300');
-                    dot.classList.replace('w-6', 'w-2');
+                    dot.classList.remove('bg-black', 'w-6');
+                    dot.classList.add('bg-gray-300', 'w-2');
                 }
             });
         }
 
-        // Auto-play Carrossel
-        let autoPlayCarousel = setInterval(() => {
-            currentIndex = (currentIndex + 1) % cards.length;
-            goToSlide(currentIndex);
-        }, 5000);
+        // Função para iniciar/reiniciar o autoplay
+        function startAutoPlay() {
+            clearInterval(autoPlayCarousel);
+            autoPlayCarousel = setInterval(() => {
+                currentIndex = (currentIndex + 1) % cards.length;
+                goToSlide(currentIndex);
+            }, 5000);
+        }
 
-        track.addEventListener('mouseenter', () => clearInterval(autoPlayCarousel));
+        // Eventos de controle
+        startAutoPlay(); // Inicia ao carregar
+        
+        track.addEventListener('mouseenter', () => clearInterval(autoPlayCarousel)); // Pausa
+        track.addEventListener('mouseleave', startAutoPlay); // RETOMA (Isso faltava no seu código)
+        
         window.addEventListener('resize', () => goToSlide(currentIndex));
     }
 
