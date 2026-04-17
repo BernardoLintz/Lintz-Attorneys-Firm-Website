@@ -167,6 +167,11 @@ html {
     padding-right: 20px;
 }
 
+@keyframes ticker {
+0% {transform: translateX(0);}
+100% {transform: translateX(-50%);} }
+.animate-ticker {animation: ticker 40s linear infinite;}
+
 /* --- FOOTER --- */
 .footer-dark {
     background: #111;
