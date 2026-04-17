@@ -110,7 +110,7 @@ header.sticky-nav {
 /* --- MENU MOBILE (SLIDE-IN) --- */
 /* Resolve o corte das seções no topo (61px da nav + 20px de respiro) */
 html {
-    scroll-padding-top: 73px;
+   
     scroll-behavior: smooth;
 }
 
