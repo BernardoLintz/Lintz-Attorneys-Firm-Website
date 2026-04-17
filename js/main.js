@@ -139,7 +139,7 @@ if (menuBtn && mobileMenu) {
             btn.disabled = true;
 
             // Certifique-se que o SERVICE_ID e TEMPLATE_ID estão corretos no seu painel
-            emailjs.sendForm('service_qtUrnVDfcTSRNgox', 'template_tnsxepv', this)
+            emailjs.sendForm('service_hostinger_lintz', 'template_lintzadv', this)
                 .then(() => {
                     alert('Obrigado! Seu email foi enviado com sucesso.');
                     contactForm.reset();
