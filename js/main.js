@@ -154,7 +154,7 @@ if (menuBtn && mobileMenu) {
         });
     }
 
-    // --- PARALLAX HERO ---
+    // --- PARALLAX HERO (OTIMIZADO) ---
     const bg = document.querySelector(".hero-bg");
     let mouseX = 0, mouseY = 0, currentX = 0, currentY = 0;
     
@@ -164,13 +164,16 @@ if (menuBtn && mobileMenu) {
     });
 
     function animateHero() {
-        if (window.innerWidth > 1024 && bg) {
-            currentX += (mouseX * 12 - currentX) * 0.1; // Suavizado para 0.1
+        // Verifica: Se a tela for maior que 1024px E se o scroll for menor que a altura da tela
+        if (window.innerWidth > 1024 && window.scrollY < window.innerHeight && bg) {
+            currentX += (mouseX * 12 - currentX) * 0.1; 
             currentY += (mouseY * 12 - currentY) * 0.1;
             bg.style.transform = `translate3d(${-currentX}%, ${-currentY}%, 0)`;
-        } else if (bg) {
+        } else if (bg && window.innerWidth <= 1024) {
+            // No mobile ou tablet, remove o transform para não bugar o layout
             bg.style.transform = 'none';
         }
+        
         requestAnimationFrame(animateHero);
     }
     animateHero();
