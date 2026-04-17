@@ -88,7 +88,7 @@ function closeModal(modalId) {
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- MENU MOBILE (Lógica 'Active' para deslize lateral) ---
-   // --- MENU MOBILE ---
+   
 const menuBtn = document.getElementById('menu-btn');
 const closeBtn = document.getElementById('close-menu'); // Adicionei o botão de fechar
 const mobileMenu = document.getElementById('mobile-menu');
