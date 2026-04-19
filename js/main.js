@@ -144,9 +144,11 @@ if (menuBtn && mobileMenu) {
                     Toastify({
                         text: "Obrigado! Seu email foi enviado com sucesso.",
                         duration: 3000,
+                        gravity: "top",
+                        position: "center",
                         style: {
                             background: "black",
-                            text: "white",
+                            color: "white",
                             }
                 }).showToast();
                   contactForm.reset();
@@ -155,9 +157,11 @@ if (menuBtn && mobileMenu) {
                      Toastify({
                         text: "Erro ao enviar o email.",
                         duration: 3000,
+                        gravity: "top",
+                        position: "center",
                         style: {
                             background: "black",
-                            text: "white",
+                            color: "white",
                             }
                 }).showToast();
                     alert('Erro ao enviar: ' + JSON.stringify(error));
