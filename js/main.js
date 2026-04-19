@@ -126,7 +126,7 @@ if (menuBtn && mobileMenu) {
 
     // --- EMAILJS ---
     if (typeof emailjs !== 'undefined') {
-        emailjs.init("qtUrnVDfcTSRNgoxo"); // Sua Public Key
+        emailjs.init("4uAX68jZrf-J7hH5B"); // Sua Public Key
     }
 
     const contactForm = document.getElementById('contact-form');
@@ -139,12 +139,27 @@ if (menuBtn && mobileMenu) {
             btn.disabled = true;
 
             // Certifique-se que o SERVICE_ID e TEMPLATE_ID estão corretos no seu painel
-            emailjs.sendForm('service_hostinger_lintz', 'template_lintzadv', this)
+            emailjs.sendForm('service_pc0f2aq', 'template_79k1akf', this)
                 .then(() => {
-                    alert('Obrigado! Seu email foi enviado com sucesso.');
-                    contactForm.reset();
+                    Toastify({
+                        text: "Obrigado! Seu email foi enviado com sucesso.",
+                        duration: 3000,
+                        style: {
+                            background: "black",
+                            text: "white",
+                            }
+                }).showToast();
+                  contactForm.reset();
                 })
                 .catch((error) => {
+                     Toastify({
+                        text: "Erro ao enviar o email.",
+                        duration: 3000,
+                        style: {
+                            background: "black",
+                            text: "white",
+                            }
+                }).showToast();
                     alert('Erro ao enviar: ' + JSON.stringify(error));
                 })
                 .finally(() => {
