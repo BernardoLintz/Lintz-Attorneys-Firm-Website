@@ -1,3 +1,3 @@
-PUBLIC_KEY="4uAX68jZrf-J7hH5B"
-SERVICE_ID="service_9h8l7qj"
-TEMPLATE_ID="template_9h8l7qj"
+window.EMAILJS_PUBLIC_KEY = "4uAX68jZrf-J7hH5B";
+window.SERVICE_ID = "service_pc0f2aq";
+window.TEMPLATE_ID = "template_79k1akf";

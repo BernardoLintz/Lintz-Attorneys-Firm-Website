@@ -126,7 +126,7 @@ if (menuBtn && mobileMenu) {
 
     // --- EMAILJS ---
     if (typeof emailjs !== 'undefined') {
-        emailjs.init("4uAX68jZrf-J7hH5B"); // Sua Public Key
+       emailjs.init(window.EMAILJS_PUBLIC_KEY);
     }
 
     const contactForm = document.getElementById('contact-form');
@@ -139,7 +139,7 @@ if (menuBtn && mobileMenu) {
             btn.disabled = true;
 
             // Certifique-se que o SERVICE_ID e TEMPLATE_ID estão corretos no seu painel
-            emailjs.sendForm('service_pc0f2aq', 'template_79k1akf', this)
+           emailjs.sendForm(window.SERVICE_ID, window.TEMPLATE_ID, this)
                 .then(() => {
                     Toastify({
                         text: "Obrigado! Seu email foi enviado com sucesso.",
