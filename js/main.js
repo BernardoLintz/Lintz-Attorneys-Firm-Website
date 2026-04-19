@@ -217,7 +217,7 @@ if (menuBtn && mobileMenu) {
         });
     });
 
-    // --- CARROSSEL DE DEPOIMENTOS ---
+   
     // --- CARROSSEL DE DEPOIMENTOS ---
     const track = document.getElementById('carousel-track');
     const indicatorsContainer = document.getElementById('indicators-container');
