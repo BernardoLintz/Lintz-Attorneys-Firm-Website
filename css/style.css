@@ -1,3 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-scroll-up: up 150s linear infinite;
+  --animate-scroll-down: down 170s linear infinite;
+  --animate-scroll-up-slow: up 160s linear infinite;
+  --animate-ticker: ticker 40s linear infinite;
+
+  @keyframes up {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
+  @keyframes down {
+    from { transform: translateY(-50%); }
+    to { transform: translateY(0); }
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+}
 /* --- CONFIGURAÇÕES GERAIS E TRAVA DE LAYOUT --- */
 html, body {
     width: 100%;

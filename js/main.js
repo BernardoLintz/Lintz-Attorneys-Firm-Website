@@ -3,29 +3,6 @@
  * Descrição: Lógica de animação Hero, Accordion, Carrossel, Modais e EmailJS
  */
 
-// 1. CONFIGURAÇÃO TAILWIND
-if (typeof tailwind !== 'undefined') {
-    tailwind.config = {
-        theme: {
-            extend: {
-                animation: {
-                    'scroll-up': 'up 150s linear infinite',
-                    'scroll-down': 'down 170s linear infinite',
-                    'scroll-up-slow': 'up 160s linear infinite',
-                    'ticker': 'ticker 40s linear infinite', // Adicionado para os logos
-                },
-                keyframes: {
-                    'up': { 'from': { transform: 'translateY(0)' }, 'to': { transform: 'translateY(-50%)' } },
-                    'down': { 'from': { transform: 'translateY(-50%)' }, 'to': { transform: 'translateY(0)' } },
-                    'ticker': { // Adicionado para movimento horizontal
-                        '0%': { transform: 'translateX(0)' },
-                        '100%': { transform: 'translateX(-50%)' }
-                    }
-                }
-            }
-        }
-    };
-}
 // 2. VARIÁVEIS GLOBAIS
 let currentNews = 0;
 let autoPlayNews;
