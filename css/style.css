@@ -56,6 +56,7 @@
     background-size: cover;
     background-position: center;
     will-change: transform;
+    overflow-anchor: none;
   }
 
   .hero-content-wrapper { @apply relative z-10 w-full h-full flex justify-center items-center px-4; }

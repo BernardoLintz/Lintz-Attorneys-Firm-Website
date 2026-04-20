@@ -159,19 +159,26 @@ if (menuBtn && mobileMenu) {
         mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
     });
 
-    function animateHero() {
-        // Verifica: Se a tela for maior que 1024px E se o scroll for menor que a altura da tela
-        if (window.innerWidth > 1024 && window.scrollY < window.innerHeight && bg) {
-            currentX += (mouseX * 12 - currentX) * 0.1; 
-            currentY += (mouseY * 12 - currentY) * 0.1;
-            bg.style.transform = `translate3d(${-currentX}%, ${-currentY}%, 0)`;
-        } else if (bg && window.innerWidth <= 1024) {
-            // No mobile ou tablet, remove o transform para não bugar o layout
-            bg.style.transform = 'none';
-        }
+let animationId;
+
+   function animateHero() {
+    if (window.innerWidth > 1024 && window.scrollY < window.innerHeight && bg) {
+        const targetX = mouseX * 12;
+        const targetY = mouseY * 12;
         
-        requestAnimationFrame(animateHero);
+        // Só atualiza se a diferença for relevante
+        if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
+            currentX += (targetX - currentX) * 0.1; 
+            currentY += (targetY - currentY) * 0.1;
+            bg.style.transform = `translate3d(${-currentX}%, ${-currentY}%, 0)`;
+        }
+    } else if (bg && window.innerWidth <= 1024) {
+        bg.style.transform = 'none';
     }
+    
+    animationId = requestAnimationFrame(animateHero);
+}
+    
     animateHero();
 
     // --- ACCORDION ---
