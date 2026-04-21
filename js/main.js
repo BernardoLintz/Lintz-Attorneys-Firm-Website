@@ -101,7 +101,7 @@ if (menuBtn && mobileMenu) {
     });
 }
 
-  // --- ENVIO PROFISSIONAL VIA PHP (FULL-STACK) ---
+// --- ENVIO PROFISSIONAL VIA PHP (FULL-STACK) ---
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(event) {
@@ -109,19 +109,50 @@ if (menuBtn && mobileMenu) {
             
             const btn = document.getElementById('submit-btn');
             const originalText = btn.innerText;
-            btn.innerText = "ENVIANDO..."; // Traduzi para manter seu padrão
-            btn.disabled = true;
-
-            // FormData captura automaticamente os campos: user_name, user_email e message
+            
+            // FormData captura os campos do formulário
             const formData = new FormData(this);
 
-            fetch('/send_email.php', {
+            // 1. VALIDAÇÃO BÁSICA DE SEGURANÇA
+            const emailField = formData.get('user_email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(emailField)) {
+                Toastify({
+                    text: "Por favor, insira um e-mail válido.",
+                    style: { background: "#E11D48" }
+                }).showToast();
+                return;
+            }
+
+            // 2. HIGIENIZAÇÃO RIGOROSA (Prevenção de Injection)
+            // Remove tags HTML e escapa caracteres perigosos
+            for (let [key, value] of formData.entries()) {
+                if (typeof value === 'string') {
+                    const cleanValue = value
+                        .replace(/<[^>]*>?/gm, '') // Remove HTML tags
+                        .replace(/[<>]/g, '')      // Remove sobras de brackets
+                        .trim();
+                    formData.set(key, cleanValue);
+                }
+            }
+
+            btn.innerText = "ENVIANDO...";
+            btn.disabled = true;
+
+            fetch('https://lintzadv.com.br/send_email.php', {
                 method: 'POST',
                 body: formData,
-                mode: 'cors' // Garante que o navegador permita a requisição
+                mode: 'cors'
             })
             .then(async response => {
-                const result = await response.json();
+                let result;
+                try {
+                    result = await response.json();
+                } catch (e) {
+                    throw new Error("Resposta inválida do servidor.");
+                }
+
                 if (response.ok) {
                     Toastify({
                         text: "Obrigado! Seu email foi enviado com sucesso.",
@@ -132,13 +163,15 @@ if (menuBtn && mobileMenu) {
                     }).showToast();
                     contactForm.reset();
                 } else {
-                    throw new Error(result.error || 'Erro no servidor');
+                    // Loga o erro técnico no console para o desenvolvedor
+                    console.error("Erro Técnico:", result.details || result.error);
+                    throw new Error(result.error || 'Falha no envio');
                 }
             })
             .catch((error) => {
                 console.error('Erro de submissão:', error);
                 Toastify({
-                    text: "Houve um problema técnico. Por favor, tente novamente mais tarde.",
+                    text: "Houve um problema técnico. Por favor, tente novamente.",
                     duration: 3000,
                     gravity: "top",
                     position: "center",
@@ -151,6 +184,7 @@ if (menuBtn && mobileMenu) {
             });
         });
     }
+  
     // --- PARALLAX HERO (OTIMIZADO) ---
     const bg = document.querySelector(".hero-bg");
     let mouseX = 0, mouseY = 0, currentX = 0, currentY = 0;
