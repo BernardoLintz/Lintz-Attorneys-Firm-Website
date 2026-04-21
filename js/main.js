@@ -115,7 +115,7 @@ if (menuBtn && mobileMenu) {
             // FormData captura automaticamente os campos: user_name, user_email e message
             const formData = new FormData(this);
 
-            fetch('send_email.php', {
+            fetch('/send_email.php', {
                 method: 'POST',
                 body: formData
             })
