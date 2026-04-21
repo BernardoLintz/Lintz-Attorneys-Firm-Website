@@ -5,57 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Escritório de advocacia com mais de 48 anos de tradição. Especialistas em Direito Civil, Empresarial, Migratório e Internacional no Rio de Janeiro e Portugal.">
     <title>Lintz Advogados | Advocacia Especializada no Rio de Janeiro e Portugal</title>
-    <meta name="keywords" content="advogado rio de janeiro, cidadania portuguesa, direito empresarial, advocacia barra da tijuca, direito civil rj">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
     <link rel="preload" href="/imagens/webp/index2-mobile.webp" as="image" media="(max-width: 767px)" fetchpriority="high">
     <link rel="preload" href="/imagens/webp/index2.webp" as="image" media="(min-width: 768px)" fetchpriority="high">
 
+    <link rel="stylesheet" href="css/dist.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" media="print" onload="this.media='all'">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="canonical" href="https://www.lintzadv.com.br/">
-    
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <link rel="stylesheet" href="css/dist.css">
+
     <script type="application/ld+json">
         {
-        "@context": "https://schema.org",
-        "@type": "LegalService",
-        "name": "Lintz Advogados",
-        "address": [
-        {
-        "@type": "PostalAddress",
-        "streetAddress": "Rua Mario Covas Jr, 335",
-        "addressLocality": "Rio de Janeiro",
-        "addressRegion": "RJ",
-        "addressCountry": "BR"
-        },
-        {
-        "@type": "PostalAddress",
-        "streetAddress": "Av. General Torres, 313",
-        "addressLocality": "Vila Nova de Gaia",
-        "addressRegion": "Porto",
-        "addressCountry": "PT"
-        },
-        {
-        "@type": "PostalAddress",
-        "streetAddress": "HaRav Reines, 7",
-        "addressLocality": "Bnei Brak",
-        "addressRegion": "District of Tel Aviv",
-        "addressCountry": "IL"
+          "@context": "https://schema.org",
+          "@type": "LegalService",
+          "name": "Lintz Advogados",
+          "address": [
+            { "@type": "PostalAddress", "streetAddress": "Rua Mario Covas Jr, 335", "addressLocality": "Rio de Janeiro", "addressRegion": "RJ", "addressCountry": "BR" },
+            { "@type": "PostalAddress", "streetAddress": "Av. General Torres, 313", "addressLocality": "Vila Nova de Gaia", "addressRegion": "Porto", "addressCountry": "PT" },
+            { "@type": "PostalAddress", "streetAddress": "HaRav Reines, 7", "addressLocality": "Bnei Brak", "addressRegion": "District of Tel Aviv", "addressCountry": "IL" }
+          ],
+          "telephone": "+55-21-3148-4340",
+          "url": "https://www.lintzadv.com.br/",
+          "founder": "Marco Antonio Lintz Leite"
         }
-        ],
-        "telephone": "+55-21-3148-4340",
-        "url": "https://www.lintzadv.com.br/",
-        "founder": "Marco Antonio Lintz Leite"
-        }
-</script>
+    </script>
 </head>
 <body>
     <header class="sticky-nav bg-white shadow-sm w-full left-0 top-0">
@@ -77,22 +62,26 @@
             <a href="#materias">MATÉRIAS</a>
             <a href="#contato">FALE CONOSCO</a>
         </div>
-
-        <button id="menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2 outline-none focus:ring-0 appearance-none" style="-webkit-tap-highlight-color: transparent;">
+        <button id="menu-btn" class="lg:hidden flex flex-col gap-1.5 p-3 outline-none focus:ring-0 appearance-none" style="-webkit-tap-highlight-color: transparent;" aria-label="Abrir menu de navegação" title="Menu">
             <div class="w-6 h-0.5 bg-black"></div>
             <div class="w-6 h-0.5 bg-black"></div>
             <div class="w-6 h-0.5 bg-black"></div>
         </button>
     </nav>
-<div id="mobile-menu" class="transform translate-x-full lg:hidden h-auto p-6 space-y-4">
+<div id="mobile-menu" 
+     class="transform translate-x-full lg:hidden h-auto p-6 space-y-4" 
+     role="dialog" 
+     aria-modal="true" 
+     aria-label="Menu principal">
+    
     <nav class="flex flex-col">
-        <a href="#" class="block py-4 border-b border-gray-50 text-[11px] font-bold tracking-widest text-gray-600">HOME</a>
-        <a href="#sobre" class="block py-4 border-b border-gray-50 text-[11px] font-bold tracking-widest text-gray-600">SOBRE NÓS</a>
-        <a href="#atuacao" class="block py-4 border-b border-gray-50 text-[11px] font-bold tracking-widest text-gray-600">ÁREAS DE ATUAÇÃO</a>
-        <a href="#clientes" class="block py-4 border-b border-gray-50 text-[11px] font-bold tracking-widest text-gray-600">CLIENTES & PARCEIROS</a>
-        <a href="#socios" class="block py-4 border-b border-gray-50 text-[11px] font-bold tracking-widest text-gray-600">SÓCIOS</a>
-        <a href="#materias" class="block py-4 border-b border-gray-50 text-[11px] font-bold tracking-widest text-gray-600">MATÉRIAS</a>
-        <a href="#contato" class="block py-4 text-[11px] font-bold tracking-widest text-gray-600">FALE CONOSCO</a>
+        <a href="#" class="block py-5 border-b border-gray-50 text-[14px] font-bold tracking-widest text-gray-800 hover:text-black transition-colors">HOME</a>
+        <a href="#sobre" class="block py-5 border-b border-gray-50 text-[14px] font-bold tracking-widest text-gray-800 hover:text-black transition-colors">SOBRE NÓS</a>
+        <a href="#atuacao" class="block py-5 border-b border-gray-50 text-[14px] font-bold tracking-widest text-gray-800 hover:text-black transition-colors">ÁREAS DE ATUAÇÃO</a>
+        <a href="#clientes" class="block py-5 border-b border-gray-50 text-[14px] font-bold tracking-widest text-gray-800 hover:text-black transition-colors">CLIENTES & PARCEIROS</a>
+        <a href="#socios" class="block py-5 border-b border-gray-50 text-[14px] font-bold tracking-widest text-gray-800 hover:text-black transition-colors">SÓCIOS</a>
+        <a href="#materias" class="block py-5 border-b border-gray-50 text-[14px] font-bold tracking-widest text-gray-800 hover:text-black transition-colors">MATÉRIAS</a>
+        <a href="#contato" class="block py-5 text-[14px] font-bold tracking-widest text-gray-800 hover:text-black transition-colors">FALE CONOSCO</a>
     </nav>
 </div>
 </header>
@@ -164,13 +153,22 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 border-t border-gray-100 items-start">
             
             <div class="accordion-item border-b border-gray-100 overflow-hidden" data-aos="fade-up">
-                <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header">
-                    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
-                        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300"></div>
-                        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300">Direito Civil</h3>
-                    </div>
-                    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4">↓</span>
-                </button>
+                <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header"
+        aria-expanded="false" 
+        aria-label="Ver detalhes sobre Direito Civil">
+    
+    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
+        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300" aria-hidden="true"></div>
+        
+        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300">
+            Direito Civil
+        </h3>
+    </div>
+
+    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4" aria-hidden="true">
+        ↓
+    </span>
+</button>
                 <div class="accordion-content max-h-0 transition-all duration-500 ease-in-out bg-gray-50 overflow-hidden">
                     <div class="p-8 text-gray-600 leading-relaxed text-justify">
                         <h6 class="mb-3 font-bold text-[#002d72]">Visão Estratégica e Preservação Patrimonial</h6>
@@ -180,13 +178,22 @@
             </div>
 
             <div class="accordion-item border-b border-gray-100 overflow-hidden" data-aos="fade-up">
-                <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header">
-                    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
-                        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300"></div>
-                        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300">Direito Consumidor</h3>
-                    </div>
-                    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4">↓</span>
-                </button>
+               <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header"
+        aria-expanded="false"
+        aria-label="Expandir detalhes sobre Direito do Consumidor">
+    
+    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
+        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300" aria-hidden="true"></div>
+        
+        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300">
+            Direito Consumidor
+        </h3>
+    </div>
+
+    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4" aria-hidden="true">
+        ↓
+    </span>
+</button>
                 <div class="accordion-content max-h-0 transition-all duration-500 ease-in-out bg-gray-50 overflow-hidden">
                     <div class="p-8 text-gray-600 leading-relaxed text-justify">
                         <h6 class="mb-3 font-bold text-[#002d72]">Inteligência jurídica focada em resultados</h6>
@@ -196,13 +203,22 @@
             </div>
 
             <div class="accordion-item border-b border-gray-100 overflow-hidden" data-aos="fade-up">
-                <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header">
-                    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
-                        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300"></div>
-                        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300">Direito Empresarial</h3>
-                    </div>
-                    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4">↓</span>
-                </button>
+                <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header"
+        aria-expanded="false"
+        aria-label="Ver mais sobre Direito Empresarial">
+    
+    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
+        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300" aria-hidden="true"></div>
+        
+        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300">
+            Direito Empresarial
+        </h3>
+    </div>
+
+    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4" aria-hidden="true">
+        ↓
+    </span>
+</button>
                 <div class="accordion-content max-h-0 transition-all duration-500 ease-in-out bg-gray-50 overflow-hidden">
                     <div class="p-8 text-gray-600 leading-relaxed text-justify">
                         <h6 class="mb-3 font-bold text-[#002d72]">Visão de Board e Inteligência de Negócio</h6>
@@ -212,13 +228,22 @@
             </div>
 
             <div class="accordion-item border-b border-gray-100 overflow-hidden" data-aos="fade-up">
-                <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header">
-                    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
-                        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300"></div>
-                        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300">Direito de Família</h3>
-                    </div>
-                    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4">↓</span>
-                </button>
+                <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header"
+        aria-expanded="false"
+        aria-label="Ver detalhes sobre Direito de Família">
+    
+    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
+        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300" aria-hidden="true"></div>
+        
+        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300">
+            Direito de Família
+        </h3>
+    </div>
+
+    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4" aria-hidden="true">
+        ↓
+    </span>
+</button>
                 <div class="accordion-content max-h-0 transition-all duration-500 ease-in-out bg-gray-50 overflow-hidden">
                     <div class="p-8 text-gray-600 leading-relaxed text-justify">
                         <h6 class="mb-3 font-bold text-[#002d72]">Acolhimento e Segurança Jurídica</h6>
@@ -228,13 +253,22 @@
             </div>
 
             <div class="accordion-item border-b border-gray-100 overflow-hidden" data-aos="fade-up">
-                <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header">
-                    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
-                        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300"></div>
-                        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300 text-center md:text-left">Direito Migratório e de Nacionalidade</h3>
-                    </div>
-                    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4">↓</span>
-                </button>
+                <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header"
+        aria-expanded="false"
+        aria-label="Ver detalhes sobre Direito Migratório e de Nacionalidade">
+    
+    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
+        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300" aria-hidden="true"></div>
+        
+        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300 text-center md:text-left">
+            Direito Migratório e de Nacionalidade
+        </h3>
+    </div>
+
+    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4" aria-hidden="true">
+        ↓
+    </span>
+</button>
                 <div class="accordion-content max-h-0 transition-all duration-500 ease-in-out bg-gray-50 overflow-hidden">
                     <div class="p-8 text-gray-600 leading-relaxed text-justify">
                         <h6 class="mb-3 font-bold text-[#002d72]">Direito à mobilidade e reconhecimento de nacionalidade</h6>
@@ -244,13 +278,22 @@
             </div>
 
             <div class="accordion-item border-b border-gray-100 overflow-hidden" data-aos="fade-up">
-                <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header">
-                    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
-                        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300"></div>
-                        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300">Direito Trabalhista</h3>
-                    </div>
-                    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4">↓</span>
-                </button>
+                <button class="w-full py-8 px-2 md:px-4 flex justify-between items-center group cursor-pointer transition-all duration-300 hover:bg-black focus:outline-none accordion-header"
+        aria-expanded="false"
+        aria-label="Ver mais sobre Direito Trabalhista">
+    
+    <div class="flex-1 flex items-center justify-center md:justify-start gap-4 md:gap-6 pointer-events-none">
+        <div class="hidden md:flex w-16 h-16 items-center justify-center overflow-hidden bg-white group-hover:bg-black transition-colors duration-300" aria-hidden="true"></div>
+        
+        <h3 class="text-xl font-bold text-black group-hover:text-white transition-colors duration-300">
+            Direito Trabalhista
+        </h3>
+    </div>
+
+    <span class="text-2xl text-black group-hover:text-white transition-all duration-300 icon-arrow ml-4" aria-hidden="true">
+        ↓
+    </span>
+</button>
                 <div class="accordion-content max-h-0 transition-all duration-500 ease-in-out bg-gray-50 overflow-hidden">
                     <div class="p-8 text-gray-600 leading-relaxed text-justify">
                         <h6 class="mb-3 font-bold text-[#002d72]">Gestão Estratégica e Segurança Jurídica</h6>

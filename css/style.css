@@ -114,9 +114,16 @@
   .area-card:hover { @apply bg-[#1A1A1A] text-white pl-8 pr-5; }
   
   #mobile-menu {
-    @apply fixed top-[60px] right-0 w-1/2 h-auto z-[9999] bg-white flex flex-col transition-transform duration-500 border-l border-b border-gray-100 shadow-2xl translate-x-full;
-  }
-  #mobile-menu.active { @apply translate-x-0; }
+  /* ... seu código existente ... */
+  @apply fixed top-[60px] right-0 w-1/2 h-auto z-[9999] bg-white flex flex-col transition-transform duration-500 border-l border-b border-gray-100 shadow-2xl translate-x-full;
+  
+  /* ADICIONE ESTA LINHA */
+  will-change: transform; 
+}
+
+#mobile-menu.active { 
+  @apply translate-x-0; 
+}
 
   /* Utilitários dentro do layer components */
   .animate-ticker { @apply flex will-change-transform; }

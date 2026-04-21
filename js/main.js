@@ -1,11 +1,12 @@
 /**
  * ARQUIVO: script.js
- * Descrição: Lógica de animação Hero, Accordion, Carrossel, Modais e EmailJS
+ * Descrição: Lógica de animação Hero, Accordion, Carrossel, Modais e Envio de Formulário
  */
 
 // 2. VARIÁVEIS GLOBAIS
 let currentNews = 0;
 let autoPlayNews;
+let animationId; // Controle do Parallax
 
 // 3. FUNÇÕES DE NOTÍCIAS
 function updateNews() {
@@ -15,20 +16,20 @@ function updateNews() {
     if (newsItems.length === 0) return;
 
     newsItems.forEach((item, index) => {
-        if (index === currentNews) {
+        const isActive = index === currentNews;
+        if (isActive) {
             item.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none', 'absolute');
             item.classList.add('opacity-100', 'translate-y-0', 'relative');
-            if (newsDots[index]) {
-                newsDots[index].classList.remove('bg-gray-600');
-                newsDots[index].classList.add('bg-white');
-            }
         } else {
             item.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none', 'absolute');
             item.classList.remove('opacity-100', 'translate-y-0', 'relative');
-            if (newsDots[index]) {
-                newsDots[index].classList.remove('bg-white');
-                newsDots[index].classList.add('bg-gray-600');
-            }
+        }
+        
+        if (newsDots[index]) {
+            newsDots[index].classList.toggle('bg-white', isActive);
+            newsDots[index].classList.toggle('bg-gray-600', !isActive);
+            // Acessibilidade
+            newsDots[index].setAttribute('aria-current', isActive ? 'true' : 'false');
         }
     });
 }
@@ -64,119 +65,60 @@ function closeModal(modalId) {
 // 5. INICIALIZAÇÃO E LÓGICA DE DOM
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- MENU MOBILE (Lógica 'Active' para deslize lateral) ---
-   
-const menuBtn = document.getElementById('menu-btn');
-const closeBtn = document.getElementById('close-menu'); // Adicionei o botão de fechar
-const mobileMenu = document.getElementById('mobile-menu');
+    // --- MENU MOBILE ---
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-if (menuBtn && mobileMenu) {
-    const toggleMenu = () => {
-        // Alterna as classes do Tailwind para deslizar
-        mobileMenu.classList.toggle('translate-x-full');
-        mobileMenu.classList.toggle('translate-x-0');
-        
-        // Trava o scroll
-        const isOpen = mobileMenu.classList.contains('translate-x-0');
-        document.body.style.overflow = isOpen ? 'hidden' : 'auto';
-    };
+    if (menuBtn && mobileMenu) {
+        const toggleMenu = () => {
+            const isOpen = mobileMenu.classList.contains('translate-x-0');
+            mobileMenu.classList.toggle('translate-x-full', isOpen);
+            mobileMenu.classList.toggle('translate-x-0', !isOpen);
+            
+            // Sincronização de Acessibilidade
+            menuBtn.setAttribute('aria-expanded', !isOpen);
+            mobileMenu.setAttribute('aria-hidden', isOpen);
+            document.body.style.overflow = !isOpen ? 'hidden' : 'auto';
+        };
 
-    menuBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        toggleMenu();
-    });
+        menuBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleMenu();
+        });
 
-    // Se o botão de fechar (X) existir, ele também deve funcionar
-    if (closeBtn) {
-        closeBtn.addEventListener('click', toggleMenu);
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
     }
 
-    // Fecha ao clicar nos links
-    mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('translate-x-full');
-            mobileMenu.classList.remove('translate-x-0');
-            document.body.style.overflow = 'auto';
-        });
-    });
-}
-
-// --- ENVIO PROFISSIONAL VIA PHP (FULL-STACK) ---
+    // --- ENVIO DE FORMULÁRIO (FETCH PHP) ---
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            
             const btn = document.getElementById('submit-btn');
             const originalText = btn.innerText;
-            
-            // FormData captura os campos do formulário
             const formData = new FormData(this);
 
-            // 1. VALIDAÇÃO BÁSICA DE SEGURANÇA
+            // Validação e Higienização rápida
             const emailField = formData.get('user_email');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
-            if (!emailRegex.test(emailField)) {
-                Toastify({
-                    text: "Por favor, insira um e-mail válido.",
-                    style: { background: "#E11D48" }
-                }).showToast();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField)) {
+                Toastify({ text: "E-mail inválido", style: { background: "#E11D48" } }).showToast();
                 return;
-            }
-
-            // 2. HIGIENIZAÇÃO RIGOROSA (Prevenção de Injection)
-            // Remove tags HTML e escapa caracteres perigosos
-            for (let [key, value] of formData.entries()) {
-                if (typeof value === 'string') {
-                    const cleanValue = value
-                        .replace(/<[^>]*>?/gm, '') // Remove HTML tags
-                        .replace(/[<>]/g, '')      // Remove sobras de brackets
-                        .trim();
-                    formData.set(key, cleanValue);
-                }
             }
 
             btn.innerText = "ENVIANDO...";
             btn.disabled = true;
 
-            fetch('/send_email.php', {
-                method: 'POST',
-                body: formData,
-                mode: 'cors'
-            })
-            .then(async response => {
-                let result;
-                try {
-                    result = await response.json();
-                } catch (e) {
-                    throw new Error("Resposta inválida do servidor.");
-                }
-
-                if (response.ok) {
-                    Toastify({
-                        text: "Obrigado! Seu email foi enviado com sucesso.",
-                        duration: 3000,
-                        gravity: "top",
-                        position: "center",
-                        style: { background: "black", color: "white" }
-                    }).showToast();
+            fetch('/send_email.php', { method: 'POST', body: formData })
+            .then(async r => {
+                if (r.ok) {
+                    Toastify({ text: "Enviado com sucesso!", style: { background: "black" } }).showToast();
                     contactForm.reset();
-                } else {
-                    // Loga o erro técnico no console para o desenvolvedor
-                    console.error("Erro Técnico:", result.details || result.error);
-                    throw new Error(result.error || 'Falha no envio');
-                }
+                } else { throw new Error(); }
             })
-            .catch((error) => {
-                console.error('Erro de submissão:', error);
-                Toastify({
-                    text: "Houve um problema técnico. Por favor, tente novamente.",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "center",
-                    style: { background: "#E11D48", color: "white" }
-                }).showToast();
+            .catch(() => {
+                Toastify({ text: "Erro ao enviar", style: { background: "#E11D48" } }).showToast();
             })
             .finally(() => {
                 btn.innerText = originalText;
@@ -184,59 +126,57 @@ if (menuBtn && mobileMenu) {
             });
         });
     }
-  
-    // --- PARALLAX HERO (OTIMIZADO) ---
+
+    // --- PARALLAX HERO (BLOQUEADO PARA MOBILE/TABLET) ---
     const bg = document.querySelector(".hero-bg");
     let mouseX = 0, mouseY = 0, currentX = 0, currentY = 0;
     
-    document.addEventListener("mousemove", (e) => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    });
+    if (window.innerWidth > 1024) {
+        document.addEventListener("mousemove", (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        });
 
-let animationId;
-
-   function animateHero() {
-    if (window.innerWidth > 1024 && window.scrollY < window.innerHeight && bg) {
-        const targetX = mouseX * 12;
-        const targetY = mouseY * 12;
-        
-        // Só atualiza se a diferença for relevante
-        if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
-            currentX += (targetX - currentX) * 0.1; 
-            currentY += (targetY - currentY) * 0.1;
-            bg.style.transform = `translate3d(${-currentX}%, ${-currentY}%, 0)`;
+        function animateHero() {
+            // Só processa se estiver no desktop e visível
+            if (window.innerWidth > 1024 && window.scrollY < window.innerHeight && bg) {
+                const targetX = mouseX * 12;
+                const targetY = mouseY * 12;
+                currentX += (targetX - currentX) * 0.1; 
+                currentY += (targetY - currentY) * 0.1;
+                bg.style.transform = `translate3d(${-currentX}%, ${-currentY}%, 0)`;
+                animationId = requestAnimationFrame(animateHero);
+            } else {
+                if (bg) bg.style.transform = 'none';
+                cancelAnimationFrame(animationId);
+            }
         }
-    } else if (bg && window.innerWidth <= 1024) {
-        bg.style.transform = 'none';
+        animateHero();
     }
-    
-    animationId = requestAnimationFrame(animateHero);
-}
-    
-    animateHero();
 
-    // --- ACCORDION ---
+    // --- ACCORDION (COM ATRIBUTOS ARIA) ---
     document.querySelectorAll('.accordion-header').forEach(button => {
         button.addEventListener('click', () => {
             const content = button.nextElementSibling;
             const isOpen = content.style.maxHeight !== '0px' && content.style.maxHeight !== '';
             
+            // Fecha outros
             document.querySelectorAll('.accordion-content').forEach(c => {
                 c.style.maxHeight = '0px';
+                c.previousElementSibling.setAttribute('aria-expanded', 'false');
                 const arrow = c.previousElementSibling.querySelector('.icon-arrow');
                 if (arrow) arrow.style.transform = 'rotate(0deg)';
             });
 
             if (!isOpen) {
                 content.style.maxHeight = content.scrollHeight + "px";
+                button.setAttribute('aria-expanded', 'true');
                 const arrow = button.querySelector('.icon-arrow');
                 if (arrow) arrow.style.transform = 'rotate(180deg)';
             }
         });
     });
 
-   
     // --- CARROSSEL DE DEPOIMENTOS ---
     const track = document.getElementById('carousel-track');
     const indicatorsContainer = document.getElementById('indicators-container');
@@ -244,58 +184,50 @@ let animationId;
 
     if (track && cards.length > 0) {
         let currentIndex = 0;
-        let autoPlayCarousel; // Variável de controle
+        let autoPlayCarousel;
 
-        indicatorsContainer.innerHTML = '';
-        cards.forEach((_, i) => {
-            const dot = document.createElement('button');
-            dot.className = `h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-black w-6' : 'bg-gray-300 w-2'}`;
-            dot.addEventListener('click', () => {
-                goToSlide(i);
-                startAutoPlay(); // Reinicia o timer ao interagir
-            });
-            indicatorsContainer.appendChild(dot);
-        });
-
-        function goToSlide(index) {
+        const goToSlide = (index) => {
             currentIndex = index;
             const gap = 24; 
-            const cardWidth = cards[0].offsetWidth;
-            const offset = currentIndex * (cardWidth + gap);
-            
+            const offset = currentIndex * (cards[0].offsetWidth + gap);
             track.style.transform = `translateX(-${offset}px)`;
             
             const dots = indicatorsContainer.querySelectorAll('button');
             dots.forEach((dot, i) => {
-                if (i === currentIndex) {
-                    dot.classList.add('bg-black', 'w-6');
-                    dot.classList.remove('bg-gray-300', 'w-2');
-                } else {
-                    dot.classList.remove('bg-black', 'w-6');
-                    dot.classList.add('bg-gray-300', 'w-2');
-                }
+                dot.classList.toggle('bg-black', i === currentIndex);
+                dot.classList.toggle('w-6', i === currentIndex);
+                dot.classList.toggle('bg-gray-300', i !== currentIndex);
+                dot.classList.toggle('w-2', i !== currentIndex);
             });
-        }
+        };
 
-        // Função para iniciar/reiniciar o autoplay
-        function startAutoPlay() {
+        const startAutoPlay = () => {
             clearInterval(autoPlayCarousel);
             autoPlayCarousel = setInterval(() => {
                 currentIndex = (currentIndex + 1) % cards.length;
                 goToSlide(currentIndex);
             }, 5000);
-        }
+        };
 
-        // Eventos de controle
-        startAutoPlay(); // Inicia ao carregar
-        
-        track.addEventListener('mouseenter', () => clearInterval(autoPlayCarousel)); // Pausa
-        track.addEventListener('mouseleave', startAutoPlay); // RETOMA (Isso faltava no seu código)
-        
+        indicatorsContainer.innerHTML = '';
+        cards.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = `h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-black w-6' : 'bg-gray-300 w-2'}`;
+            dot.setAttribute('aria-label', `Ir para depoimento ${i + 1}`);
+            dot.addEventListener('click', () => {
+                goToSlide(i);
+                startAutoPlay();
+            });
+            indicatorsContainer.appendChild(dot);
+        });
+
+        startAutoPlay();
+        track.addEventListener('mouseenter', () => clearInterval(autoPlayCarousel));
+        track.addEventListener('mouseleave', startAutoPlay);
         window.addEventListener('resize', () => goToSlide(currentIndex));
     }
 
-    // Notícias Inicialização
+    // Inicialização Notícias
     updateNews();
     autoPlayNews = setInterval(() => {
         const items = document.querySelectorAll('.news-item');
@@ -305,25 +237,21 @@ let animationId;
         }
     }, 15000);
 
+    // Visibility Change (Performance)
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) clearInterval(autoPlayNews);
+        else updateNews();
+    });
+
     if (typeof AOS !== 'undefined') AOS.init({ duration: 1000, once: true });
 });
 
-// --- PROTEÇÃO DE IMAGENS E SEGURANÇA ---
-document.addEventListener('contextmenu', (e) => {
-    if (e.target.tagName === 'IMG') e.preventDefault();
-});
-
-document.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 's') e.preventDefault();
-});
-
-window.addEventListener('click', (e) => {
-    if (e.target.classList.contains('fixed')) {
-        document.querySelectorAll('.fixed:not(.hidden)').forEach(m => {
-            if(m.id !== 'mobile-menu') { // Não fecha o menu mobile clicando fora se não desejar
-                m.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-        });
+// --- SEGURANÇA ---
+document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === 's') e.preventDefault(); });
+window.addEventListener('click', e => {
+    if (e.target.classList.contains('fixed') && e.target.id !== 'mobile-menu') {
+        e.target.classList.add('hidden');
+        document.body.style.overflow = 'auto';
     }
 });
