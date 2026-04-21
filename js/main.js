@@ -117,7 +117,8 @@ if (menuBtn && mobileMenu) {
 
             fetch('/send_email.php', {
                 method: 'POST',
-                body: formData
+                body: formData,
+                mode: 'cors' // Garante que o navegador permita a requisição
             })
             .then(async response => {
                 const result = await response.json();
