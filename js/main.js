@@ -140,7 +140,7 @@ if (menuBtn && mobileMenu) {
             btn.innerText = "ENVIANDO...";
             btn.disabled = true;
 
-            fetch('https://lintzadv.com.br/send_email.php', {
+            fetch('/send_email.php', {
                 method: 'POST',
                 body: formData,
                 mode: 'cors'
