@@ -107,3 +107,23 @@
   .animate-ticker { @apply flex will-change-transform; }
   .animate-ticker:hover { animation-play-state: paused; }
 }
+
+/* Esconde o honeypot de forma segura para acessibilidade */
+.hp-container {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Fallback adicional caso o display:none falhe com bots avançados */
+@media screen and (max-width: 1px) {
+    .hp-container {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+}

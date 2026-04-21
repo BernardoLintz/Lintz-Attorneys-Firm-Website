@@ -54,7 +54,6 @@
         "founder": "Marco Antonio Lintz Leite"
         }
 </script>
-
 </head>
 <body>
     <header class="sticky-nav bg-white shadow-sm w-full left-0 top-0">
@@ -470,13 +469,26 @@
         </div>
 <div class="bg-white p-10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-50" data-aos="fade-up">
     <form id="contact-form" class="space-y-8">
-        <div class="relative"><label for="name" class="sr-only">Nome Completo</label>
-        <input type="text" id="name" name="from_name" required maxlength="100" pattern="^[a-zA-ZÀ-ÿ\s]+$" title="Apenas letras são permitidas" placeholder="Nome Completo" required class="w-full border-b border-gray-200 py-3 outline-none focus:border-black transition-colors bg-transparent placeholder-gray-400 text-black"></div>
-        <div class="relative"><label for="email" class="sr-only">E-mail Corporativo</label>
-        <input type="email" id="email" name="user_email" placeholder="E-mail Corporativo" required class="w-full border-b border-gray-200 py-3 outline-none focus:border-black transition-colors bg-transparent placeholder-gray-400 text-black"></div>
-        <div class="relative"><textarea name="message" required maxlength="500" placeholder="Breve descrição da sua demanda" rows="4" required class="w-full border-b border-gray-200 py-3 outline-none focus:border-black transition-colors bg-transparent resize-none placeholder-gray-400 text-black"></textarea></div>
-        <button type="submit" id="submit-btn" class="w-full bg-black text-white py-5 rounded-full font-bold tracking-[0.2em] hover:bg-gray-800 transition-all uppercase text-xs">ENVIAR MENSAGEM</button>
-    </form>
+    <div class="hp-container" aria-hidden="true">
+        <input type="text" name="b_website_url" tabindex="-1" autocomplete="off" placeholder="Se você é humano, ignore este campo">
+    </div>
+
+    <div class="relative">
+        <label for="name" class="sr-only">Nome Completo</label>
+        <input type="text" id="name" name="from_name" required maxlength="100" pattern="^[a-zA-ZÀ-ÿ\s]+$" title="Apenas letras são permitidas" placeholder="Nome Completo" class="w-full border-b border-gray-200 py-3 outline-none focus:border-black transition-colors bg-transparent placeholder-gray-400 text-black">
+    </div>
+
+    <div class="relative">
+        <label for="email" class="sr-only">E-mail Corporativo</label>
+        <input type="email" id="email" name="user_email" placeholder="E-mail Corporativo" required class="w-full border-b border-gray-200 py-3 outline-none focus:border-black transition-colors bg-transparent placeholder-gray-400 text-black">
+    </div>
+
+    <div class="relative">
+        <textarea name="message" required maxlength="500" placeholder="Breve descrição da sua demanda" rows="4" class="w-full border-b border-gray-200 py-3 outline-none focus:border-black transition-colors bg-transparent resize-none placeholder-gray-400 text-black"></textarea>
+    </div>
+
+    <button type="submit" id="submit-btn" class="w-full bg-black text-white py-5 rounded-full font-bold tracking-[0.2em] hover:bg-gray-800 transition-all uppercase text-xs">ENVIAR MENSAGEM</button>
+    </form> 
 </div>
 </div>
 </section>
