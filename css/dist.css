@@ -1446,7 +1446,7 @@
     width: 100%;
     -webkit-user-select: none;
     user-select: none;
-    background-image: url('../imagens/webp/index2-mobile.webp');
+    background-image: url('/imagens/webp/index2-mobile.webp');
     background-size: cover;
     background-position: center;
     will-change: auto;
@@ -1454,7 +1454,7 @@
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     .hero-bg {
-      background-image: url('../imagens/webp/index2.webp');
+      background-image: url('/imagens/webp/index2.webp');
       inset: calc(var(--spacing) * 0);
       height: 100%;
       width: 100%;
@@ -1466,7 +1466,7 @@
       left: calc(15% * -1);
       height: 130%;
       width: 130%;
-      background-image: url('../imagens/webp/index2.webp');
+      background-image: url('/imagens/webp/index2.webp');
       will-change: transform;
     }
   }
