@@ -10,7 +10,6 @@
   @keyframes down { from { transform: translateY(-50%); } to { transform: translateY(0); } }
   @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 }
-
 @layer base {
   html, body {
     width: 100%;
@@ -23,6 +22,13 @@
     color: #1A1A1A;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    font-display: swap; /* Inserido corretamente aqui */
+  }
+
+  /* Melhor lugar para regras globais de elementos */
+  .hero-bg, .nav-logo {
+    -webkit-user-drag: none;
+    user-select: none;
   }
 }
 
@@ -62,18 +68,11 @@
   .hero-content-wrapper { @apply relative z-10 w-full h-full flex justify-center items-center px-4; }
 
   /* Texto Hero Responsivo */
-  .hero-animated-text {
-    --hero-size: 1.8rem;
-    @apply font-extrabold text-white uppercase text-center leading-tight tracking-wider flex justify-center items-center flex-wrap gap-2;
-    font-size: var(--hero-size);
-  }
-
-  @media (min-width: 768px) {
-    .hero-animated-text {
-      --hero-size: 3.5rem;
-      @apply gap-4;
-    }
-  }
+ .hero-animated-text {
+  /* Fonte mínima 1.8rem, ideal 4vw, máxima 3.5rem */
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  @apply font-extrabold text-white uppercase text-center leading-tight tracking-wider flex justify-center items-center flex-wrap gap-2;
+}
 
   /* Animação das Palavras */
   .word {
@@ -108,22 +107,11 @@
   .animate-ticker:hover { animation-play-state: paused; }
 }
 
-/* Esconde o honeypot de forma segura para acessibilidade */
 .hp-container {
-    display: none !important;
-    visibility: hidden !important;
-}
-
-/* Fallback adicional caso o display:none falhe com bots avançados */
-@media screen and (max-width: 1px) {
-    .hp-container {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        border: 0;
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
     }
-}
