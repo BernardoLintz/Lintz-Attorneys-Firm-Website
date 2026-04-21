@@ -101,55 +101,55 @@ if (menuBtn && mobileMenu) {
     });
 }
 
-    // --- EMAILJS ---
-    if (typeof emailjs !== 'undefined') {
-       emailjs.init(window.EMAILJS_PUBLIC_KEY);
-    }
-
+  // --- ENVIO PROFISSIONAL VIA PHP (FULL-STACK) ---
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(event) {
             event.preventDefault();
+            
             const btn = document.getElementById('submit-btn');
             const originalText = btn.innerText;
-            btn.innerText = "ENVIANDO...";
+            btn.innerText = "ENVIANDO..."; // Traduzi para manter seu padrão
             btn.disabled = true;
 
-            // Certifique-se que o SERVICE_ID e TEMPLATE_ID estão corretos no seu painel
-           emailjs.sendForm(window.SERVICE_ID, window.TEMPLATE_ID, this)
-                .then(() => {
+            // FormData captura automaticamente os campos: user_name, user_email e message
+            const formData = new FormData(this);
+
+            fetch('send_email.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async response => {
+                const result = await response.json();
+                if (response.ok) {
                     Toastify({
                         text: "Obrigado! Seu email foi enviado com sucesso.",
                         duration: 3000,
                         gravity: "top",
                         position: "center",
-                        style: {
-                            background: "black",
-                            color: "white",
-                            }
+                        style: { background: "black", color: "white" }
+                    }).showToast();
+                    contactForm.reset();
+                } else {
+                    throw new Error(result.error || 'Erro no servidor');
+                }
+            })
+            .catch((error) => {
+                console.error('Erro de submissão:', error);
+                Toastify({
+                    text: "Houve um problema técnico. Por favor, tente novamente mais tarde.",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    style: { background: "#E11D48", color: "white" }
                 }).showToast();
-                  contactForm.reset();
-                })
-                .catch((error) => {
-                    console.error('Erro EmailJS:', error);
-                     Toastify({
-                        text: "Houve um problema técnico. Por favor, tente novamente mais tarde.",
-                        duration: 3000,
-                        gravity: "top",
-                        position: "center",
-                        style: {
-                            background: "#E11D48",
-                            color: "white",
-                            }
-                }).showToast();
-                })
-                .finally(() => {
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                });
+            })
+            .finally(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
         });
     }
-
     // --- PARALLAX HERO (OTIMIZADO) ---
     const bg = document.querySelector(".hero-bg");
     let mouseX = 0, mouseY = 0, currentX = 0, currentY = 0;
