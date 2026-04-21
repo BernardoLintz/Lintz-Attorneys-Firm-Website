@@ -8,4 +8,6 @@ Thumbs.db
 # Logs
 npm-debug.log*
 
+js/config.js
+
 tailwind.exe

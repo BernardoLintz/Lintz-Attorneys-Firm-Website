@@ -1,0 +1,3 @@
+window.EMAILJS_PUBLIC_KEY = "";
+window.SERVICE_ID = "";
+window.TEMPLATE_ID = "";

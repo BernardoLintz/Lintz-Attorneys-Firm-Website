@@ -131,17 +131,17 @@ if (menuBtn && mobileMenu) {
                   contactForm.reset();
                 })
                 .catch((error) => {
+                    console.error('Erro EmailJS:', error);
                      Toastify({
-                        text: "Erro ao enviar o email.",
+                        text: "Houve um problema técnico. Por favor, tente novamente mais tarde.",
                         duration: 3000,
                         gravity: "top",
                         position: "center",
                         style: {
-                            background: "black",
+                            background: "#E11D48",
                             color: "white",
                             }
                 }).showToast();
-                    alert('Erro ao enviar: ' + JSON.stringify(error));
                 })
                 .finally(() => {
                     btn.innerText = originalText;
